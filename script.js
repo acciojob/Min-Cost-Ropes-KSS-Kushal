@@ -1,20 +1,26 @@
 function mincost(arr)
 { 
-//write your code here
-	let minHeap = new MinHeap();
-	for (let i = 0; i < arr.length; i++) {
-		minHeap.add(arr[i]);
-	}
-	let cost = 0;
-	while (minHeap.size()>1) {
-		let min1 = minHeap.extractMin();
-		let min2 = minHeap.extractMin();
-		let sum = min1 + min2;
-		cost += sum;
-		minHeap.add(sum);
-	}
-// return the min cost
-  return cost;
+let totalCost = 0;
+
+    while (arr.length > 1) {
+        // Sort the array
+        arr.sort((a, b) => a - b);
+
+        // Pop the smallest two elements
+        let first_smallest = arr.shift();
+        let second_smallest = arr.shift();
+
+        // Add them together
+        let sum = first_smallest + second_smallest;
+
+        // Add this sum to the total cost
+        totalCost += sum;
+
+        // Push this sum back into the array
+        arr.push(sum);
+    }
+
+    return totalCost;
 }
 
 module.exports=mincost;
